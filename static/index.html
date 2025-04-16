@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automated GDPR compliance checks for small businesses">
+    <meta name="keywords" content="GDPR compliance, small business, privacy">
+    <title>GDPR Compliance Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        h1 { color: #333; }
+        form { margin: 20px auto; max-width: 400px; }
+        input { padding: 10px; margin: 5px; width: 100%; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Automated GDPR Compliance Checks</h1>
+    <p>Ensure your website meets GDPR standards with our automated tool.</p>
+    <form id="subscribe-form">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="url" id="url" placeholder="Enter your website URL" required>
+        <button type="submit">Check Now</button>
+    </form>
+    <script>
+        document.getElementById("subscribe-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const url = document.getElementById("url").value;
+            const response = await fetch("/check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, url })
+            });
+            const result = await response.json();
+            alert("Report sent to your email!");
+        });
+    </script>
+</body>
+</html>
